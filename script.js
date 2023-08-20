@@ -2,6 +2,8 @@ const container = document.querySelector("#container");
 const newGridButton = document.querySelector("#new-grid");
 const rainbowButton = document.querySelector("#rainbow-color");
 const greyScaleButton = document.querySelector("#grey-scale");
+const resetButton = document.querySelector("#reset-button")
+const DEFAULT_DIMENSION = 16;
 let dif = 0;
 
 function makeGrid(dimension) {
@@ -14,7 +16,7 @@ function makeGrid(dimension) {
     }
 }
 
-makeGrid(16);
+makeGrid(DEFAULT_DIMENSION);
 
 let cells = document.querySelectorAll(".cell");
 let cellColor = "black";
@@ -49,6 +51,7 @@ function randomColor() {
 function greyScale() {
     let actualColor = `rgba(0, 0, 0, ${dif})`;
     dif += 0.1;
+    console.log(dif);
     return actualColor;
 }
 
