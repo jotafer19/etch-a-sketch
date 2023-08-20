@@ -1,5 +1,4 @@
 :root {
-
     --primary-blue: #76c2f1a7;
     --primary-blue-button: #5f99bda8;
     --secondary-blue-button: #5f99bdfa;
@@ -52,3 +51,24 @@ body {
 .button-settings:hover {
     background-color: var(--secondary-blue-button);
 }
+
+#solid-color-container {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+#solid-color {
+    flex: 1;
+}
+
+#color-selector {
+    background-color: transparent;
+    border: none;
+}
+
+#color-selector:hover {
+    background-color: var(--secondary-blue-button);
+}
+

@@ -23,7 +23,7 @@ function fillColor() {
             } else if (cellColor === "grey") {
                 cell.style.backgroundColor = greyScale();
             } else {
-                cell.style.backgroundColor = "black";
+                cell.style.backgroundColor = colorSelector.value;
             }
         })
     })
@@ -33,19 +33,18 @@ function randomColor() {
     let redColor = Math.floor(Math.random() * 256);
     let greenColor = Math.floor(Math.random() * 256);
     let blueColor = Math.floor(Math.random() * 256);
-    console.log(randomColor);
     return `rgb(${redColor}, ${greenColor}, ${blueColor})`;
 }
 
 function greyScale() {
     let actualColor = `rgba(0, 0, 0, ${colorDegradation})`;
     colorDegradation += 0.1;
-    console.log(colorDegradation);
     return actualColor;
 }
 
 function updateGrid() {
-    cellColor = "black";
+    cellColor = "solid";
+    colorSelector.value = "#000000";
     cells.forEach(cell => {
         container.removeChild(cell);
     })
@@ -58,7 +57,8 @@ function updateGrid() {
 }
 
 function resetGrid() {
-    cellColor = "black";
+    cellColor = "solid";
+    colorSelector.value = "#000000";
     cells.forEach(cell => {
         container.removeChild(cell);
     })
@@ -67,7 +67,8 @@ function resetGrid() {
 
 const container = document.querySelector("#container");
 const newGridButton = document.querySelector("#new-grid");
-const blackButton = document.querySelector("#black-color");
+const solidButton = document.querySelector("#solid-color");
+const colorSelector = document.querySelector("#color-selector");
 const rainbowButton = document.querySelector("#rainbow-color");
 const greyScaleButton = document.querySelector("#grey-scale");
 const resetButton = document.querySelector("#reset-button")
@@ -78,8 +79,8 @@ newGridButton.addEventListener("click", () => {
     fillColor();
 })
 
-blackButton.addEventListener("click", () => {
-    cellColor = "black";
+solidButton.addEventListener("click", () => {
+    cellColor = "solid";
     fillColor;
 })
     
