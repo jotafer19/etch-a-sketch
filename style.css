@@ -1,6 +1,21 @@
 :root {
     --grid-columns: 1;
     --grid-rows: 1;
+    --primary-blue: #76c2f1a7;
+    --primary-blue-button: #5f99bda8;
+    --secondary-blue-button: #5f99bdfa;
+    --color-black: #171719;
+    --color-red: #e63946;
+}
+
+body {
+    margin: 0;
+    padding-top: 30px;
+    background-color: #ededed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 #container {
@@ -10,9 +25,33 @@
     display: grid;
     grid-template-columns: repeat(var(--grid-columns), 1fr);
     grid-template-rows: repeat(var(--grid-rows), 1fr);
+    border: 2px solid var(--primary-blue);
+    border-radius: 12px;
 }
 
 .cell {
-    border: 1px solid black;
+    border: 1px solid #76c2f12e;
     padding: 1px;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 30px;
+    background-color: var(--primary-blue);
+    border-radius: 12px;
+}
+
+.button-settings {
+    border-radius: 12px;
+    border: none;
+    padding: 8px 10px;
+    background-color: var(--primary-blue-button);
+    color: white;
+    font-weight: 900;
+}
+
+.button-settings:hover {
+    background-color: var(--secondary-blue-button);
 }
