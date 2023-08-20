@@ -16,6 +16,7 @@ function makeGrid(dimension) {
 }
 
 function fillColor() {
+    colorSelector.value = "#000000";
     cells.forEach((cell) => {
         cell.addEventListener("mouseover", () => {
             if (cellColor === "rainbow") {
