@@ -5,8 +5,8 @@ let cellColor;
 let colorDegradation = 0;
 
 function makeGrid(dimension) {
-    container.style.setProperty("--grid-columns", dimension);
-    container.style.setProperty('--grid-rows', dimension);
+    container.style.gridTemplateColumns = `repeat(${dimension}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${dimension}, 1fr)`;
     for (let i = 0; i < (dimension ** 2); i++) {
         let newCell = document.createElement("div");
         newCell.classList.add("cell");
@@ -46,7 +46,6 @@ function greyScale() {
 
 function updateGrid() {
     cellColor = "black";
-    colorDegradation = 0;
     cells.forEach(cell => {
         container.removeChild(cell);
     })

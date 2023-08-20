@@ -1,6 +1,5 @@
 :root {
-    --grid-columns: 1;
-    --grid-rows: 1;
+
     --primary-blue: #76c2f1a7;
     --primary-blue-button: #5f99bda8;
     --secondary-blue-button: #5f99bdfa;
@@ -23,8 +22,6 @@ body {
     height: 700px;
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(var(--grid-columns), 1fr);
-    grid-template-rows: repeat(var(--grid-rows), 1fr);
     border: 2px solid var(--primary-blue);
     border-radius: 12px;
 }
