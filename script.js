@@ -1,10 +1,8 @@
-const container = document.querySelector("#container");
-const newGridButton = document.querySelector("#new-grid");
-const rainbowButton = document.querySelector("#rainbow-color");
-const greyScaleButton = document.querySelector("#grey-scale");
-const resetButton = document.querySelector("#reset-button")
 const DEFAULT_DIMENSION = 16;
-let dif = 0;
+
+let cells;
+let cellColor;
+let colorDegradation = 0;
 
 function makeGrid(dimension) {
     container.style.setProperty("--grid-columns", dimension);
@@ -14,48 +12,41 @@ function makeGrid(dimension) {
         newCell.classList.add("cell");
         container.appendChild(newCell);
     }
+    cells = document.querySelectorAll(".cell");
 }
 
-makeGrid(DEFAULT_DIMENSION);
-
-let cells = document.querySelectorAll(".cell");
-let cellColor = "black";
-cells.forEach((cell) => {
-    cell.addEventListener("mouseover", () => {
-        if (cellColor === "rainbow") {
-            cell.style.backgroundColor = randomColor();
-        } else if (cellColor === "grey") {
-            cell.style.backgroundColor = greyScale();
-        } else {
-            cell.style.backgroundColor = "black";
-        }
+function fillColor() {
+    cells.forEach((cell) => {
+        cell.addEventListener("mouseover", () => {
+            if (cellColor === "rainbow") {
+                cell.style.backgroundColor = randomColor();
+            } else if (cellColor === "grey") {
+                cell.style.backgroundColor = greyScale();
+            } else {
+                cell.style.backgroundColor = "black";
+            }
+        })
     })
-})
-
-rainbowButton.addEventListener("click", () => {
-    cellColor = "rainbow";
-})
-
-greyScaleButton.addEventListener("click", () => {
-    cellColor = "grey";
-    dif = 0;
-})
+}
 
 function randomColor() {
     let redColor = Math.floor(Math.random() * 256);
     let greenColor = Math.floor(Math.random() * 256);
     let blueColor = Math.floor(Math.random() * 256);
+    console.log(randomColor);
     return `rgb(${redColor}, ${greenColor}, ${blueColor})`;
 }
 
 function greyScale() {
-    let actualColor = `rgba(0, 0, 0, ${dif})`;
-    dif += 0.1;
-    console.log(dif);
+    let actualColor = `rgba(0, 0, 0, ${colorDegradation})`;
+    colorDegradation += 0.1;
+    console.log(colorDegradation);
     return actualColor;
 }
 
-function updateGrid(cells) {
+function updateGrid() {
+    cellColor = "black";
+    colorDegradation = 0;
     cells.forEach(cell => {
         container.removeChild(cell);
     })
@@ -67,13 +58,49 @@ function updateGrid(cells) {
     
 }
 
-newGridButton.addEventListener("click", () => {
-    let newDimension = updateGrid(cells);
-    makeGrid(newDimension);
-    cells = document.querySelectorAll(".cell");
-    cells.forEach((cell) => {
-        cell.addEventListener("mouseover", () => {
-            cell.style.backgroundColor = randomColor(); 
-        })
+function resetGrid() {
+    cellColor = "black";
+    cells.forEach(cell => {
+        container.removeChild(cell);
     })
+    makeGrid(DEFAULT_DIMENSION);
+}
+
+const container = document.querySelector("#container");
+const newGridButton = document.querySelector("#new-grid");
+const blackButton = document.querySelector("#black-color");
+const rainbowButton = document.querySelector("#rainbow-color");
+const greyScaleButton = document.querySelector("#grey-scale");
+const resetButton = document.querySelector("#reset-button")
+
+newGridButton.addEventListener("click", () => {
+    let newDimension = updateGrid();
+    makeGrid(newDimension);
+    fillColor();
 })
+
+blackButton.addEventListener("click", () => {
+    cellColor = "black";
+    fillColor;
+})
+    
+rainbowButton.addEventListener("click", () => {
+    cellColor = "rainbow";
+    fillColor;
+})
+
+greyScaleButton.addEventListener("click", () => {
+    colorDegradation = 0;
+    cellColor = "grey";
+    fillColor;
+})
+
+resetButton.addEventListener("click", () => {
+    resetGrid();
+    fillColor();
+})
+
+window.onload = () => {
+    makeGrid(DEFAULT_DIMENSION);
+    fillColor();
+}
