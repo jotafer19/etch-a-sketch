@@ -13,10 +13,10 @@ function makeGrid(dimension) {
         container.appendChild(newCell);
     }
     cells = document.querySelectorAll(".cell");
+    colorSelector.value = "#000000";
 }
 
 function fillColor() {
-    colorSelector.value = "#000000";
     cells.forEach((cell) => {
         cell.addEventListener("mouseover", () => {
             if (cellColor === "rainbow") {
