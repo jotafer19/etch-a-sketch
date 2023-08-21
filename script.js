@@ -13,7 +13,6 @@ function makeGrid(dimension) {
         container.appendChild(newCell);
     }
     cells = document.querySelectorAll(".cell");
-    colorSelector.value = "#000000";
 }
 
 function fillColor() {
@@ -39,61 +38,50 @@ function randomColor() {
 
 function greyScale() {
     let actualColor = `rgba(0, 0, 0, ${colorDegradation})`;
-    colorDegradation += 0.1;
+    colorDegradation += 0.01;
     return actualColor;
-}
-
-function updateGrid() {
-    cellColor = "solid";
-    colorSelector.value = "#000000";
-    cells.forEach(cell => {
-        container.removeChild(cell);
-    })
-    let newDimension = prompt("Select a new dimension", 16);
-    while (newDimension <= 0 || newDimension > 100 ) {
-        newDimension = prompt("Accepted values between 1 and 100", 16);
-    }
-    return newDimension;
-    
 }
 
 function resetGrid() {
     cellColor = "solid";
     colorSelector.value = "#000000";
+    slider.value = "16";
+    sliderLabel.textContent = `${slider.value} x ${slider.value}`;
     cells.forEach(cell => {
         container.removeChild(cell);
     })
     makeGrid(DEFAULT_DIMENSION);
 }
 
+function updateGrid() {
+    colorDegradation = 0;
+    let newDimension = slider.value;
+    cells.forEach(cell => {
+        container.removeChild(cell);
+    })
+    makeGrid(newDimension);
+}
+
 const container = document.querySelector("#container");
-const newGridButton = document.querySelector("#new-grid");
 const solidButton = document.querySelector("#solid-color");
 const colorSelector = document.querySelector("#color-selector");
 const rainbowButton = document.querySelector("#rainbow-color");
 const greyScaleButton = document.querySelector("#grey-scale");
-const resetButton = document.querySelector("#reset-button")
-
-newGridButton.addEventListener("click", () => {
-    let newDimension = updateGrid();
-    makeGrid(newDimension);
-    fillColor();
-})
+const resetButton = document.querySelector("#reset-button");
+const slider = document.querySelector("#dimension-slider");
+const sliderLabel = document.querySelector("#slider-label");
 
 solidButton.addEventListener("click", () => {
     cellColor = "solid";
-    fillColor;
 })
     
 rainbowButton.addEventListener("click", () => {
     cellColor = "rainbow";
-    fillColor;
 })
 
 greyScaleButton.addEventListener("click", () => {
     colorDegradation = 0;
     cellColor = "grey";
-    fillColor;
 })
 
 resetButton.addEventListener("click", () => {
@@ -101,7 +89,20 @@ resetButton.addEventListener("click", () => {
     fillColor();
 })
 
+slider.addEventListener("change", () => {
+    updateGrid();
+    fillColor();
+})
+
+slider.addEventListener("mousemove", (e) => {
+    sliderLabel.textContent = `${e.target.value} x ${e.target.value}`
+})
+
 window.onload = () => {
     makeGrid(DEFAULT_DIMENSION);
     fillColor();
+    slider.value = "16";
+    colorSelector.value = "#000000";
 }
+
+
